@@ -1,0 +1,8 @@
+type Query {
+    user(id: Int!): User!
+}
+
+type User {
+    ID: Int!
+    Name: String!
+}
