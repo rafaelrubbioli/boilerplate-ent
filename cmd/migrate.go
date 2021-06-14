@@ -24,4 +24,6 @@ func main() {
 	if err := client.Schema.Create(context.Background()); err != nil {
 		log.Fatal(err)
 	}
+
+	log.Print("migration successful")
 }
