@@ -3,12 +3,13 @@
 package graphql
 
 import (
-	"entexample/pkg/graphql/gqlgen"
-	"entexample/pkg/graphql/resolver"
 	"net/http"
 	"time"
 
-	"entgo.io/ent/examples/start/ent"
+	"entexample/pkg/ent"
+	"entexample/pkg/graphql/gqlgen"
+	"entexample/pkg/graphql/resolver"
+
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/99designs/gqlgen/graphql/handler/lru"

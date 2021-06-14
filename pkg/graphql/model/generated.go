@@ -3,6 +3,7 @@
 package model
 
 type User struct {
-	ID   int    `json:"ID"`
-	Name string `json:"Name"`
+	ID      int     `json:"id"`
+	Name    string  `json:"name"`
+	Friends []*User `json:"friends"`
 }

@@ -2,7 +2,17 @@ type Query {
     user(id: Int!): User!
 }
 
+type Mutation {
+    createUser(name: String!): User!
+    createManyUsers(names: [String!]!): [User!]!
+    addFriend(id: Int!, friendID: Int!): User!
+    updateUser(id: Int!, newName: String!): User!
+    deleteUserFriends(id: Int!): Int!
+    deleteUser(id: Int!): Int!
+}
+
 type User {
-    ID: Int!
-    Name: String!
+    id: Int!
+    name: String!
+    friends: [User!]!
 }

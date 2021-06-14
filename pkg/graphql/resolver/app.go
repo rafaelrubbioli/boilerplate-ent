@@ -1,18 +1,26 @@
 package resolver
 
 import (
+	"entexample/pkg/ent"
 	"entexample/pkg/graphql/gqlgen"
-
-	"entgo.io/ent/examples/start/ent"
+	"entexample/pkg/service"
 )
 
 func New(client *ent.Client) *Resolver {
 	return &Resolver{
-		client: client,
+		userService: service.NewUser(client),
 	}
 }
 
-type Resolver struct{ client *ent.Client }
+type Resolver struct{ userService service.User }
+
+func (r *Resolver) User() gqlgen.UserResolver {
+	return userResolver{r}
+}
+
+func (r *Resolver) Mutation() gqlgen.MutationResolver {
+	return mutationResolver{r}
+}
 
 func (r *Resolver) Query() gqlgen.QueryResolver {
 	return &queryResolver{r}

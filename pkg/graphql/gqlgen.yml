@@ -9,3 +9,9 @@ model:
 resolver:
   filename: resolver/app.go
   type: Resolver
+
+models:
+  User:
+    fields:
+      friends:
+        resolver: true

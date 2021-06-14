@@ -16,11 +16,19 @@ type User interface {
 	GetName(ctx context.Context, id int) (string, error)
 	Update(ctx context.Context, id int, name string) (*ent.User, error)
 	Delete(ctx context.Context, user *ent.User) error
-	DeleteFriendsTx(ctx context.Context, tx *ent.Tx, user *ent.User) error
+	DeleteFriendsTx(ctx context.Context, user *ent.User) error
+	GetMany(ctx context.Context, options ...UserQueryOption) ([]*ent.User, error)
+	AddFriend(ctx context.Context, user, friend *ent.User) error
 }
 
 type user struct {
 	client *ent.Client
+}
+
+func NewUser(client *ent.Client) User {
+	return user{
+		client: client,
+	}
 }
 
 type UserQueryOption func(query *ent.UserQuery)
@@ -81,7 +89,7 @@ func (r user) Delete(ctx context.Context, user *ent.User) error {
 	return r.client.User.DeleteOne(user).Exec(ctx)
 }
 
-func (r user) DeleteFriendsTx(ctx context.Context, tx *ent.Tx, user *ent.User) error {
+func (r user) DeleteFriendsTx(ctx context.Context, user *ent.User) error {
 	tx, err := r.client.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -105,4 +113,9 @@ func (r user) GetMany(ctx context.Context, options ...UserQueryOption) ([]*ent.U
 	}
 
 	return query.All(ctx)
+}
+
+func (r user) AddFriend(ctx context.Context, user, friend *ent.User) error {
+	_, err := user.Update().AddFriend(friend).Save(ctx)
+	return err
 }

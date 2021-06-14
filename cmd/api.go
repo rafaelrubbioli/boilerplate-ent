@@ -9,11 +9,11 @@ import (
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
-	"entgo.io/ent/examples/start/ent"
 
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
 
+	"entexample/pkg/ent"
 	"entexample/pkg/graphql"
 )
 
