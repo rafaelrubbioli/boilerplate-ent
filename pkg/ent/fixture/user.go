@@ -21,5 +21,7 @@ func NewUser(client *ent.Client, options ...UserOption) *ent.User {
 		option(user)
 	}
 
-	return client.User.Create().SetName(user.Name).SaveX(context.Background())
+	return client.User.Create().
+		SetName(user.Name).
+		SaveX(context.Background())
 }
